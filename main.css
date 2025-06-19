@@ -1,0 +1,794 @@
+   * {
+    cursor: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  #cursor {
+    width: 0.7em;
+    height: 0.7em;
+    background-color: rgba(255, 223, 0, 0.8);
+    border: solid rgba(255, 204, 0, 1) 2px;
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  body {
+    font-family: "LXGW WenKai TC", cursive;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width:100%;
+    overflow-x:hidden;
+    height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 26px;
+    color: #655753;
+    background-color: antiquewhite;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body.wish-page .nav {
+    color: rgb(222, 203, 180);
+  }
+  
+  body.share-active {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .contentFrame {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .container,
+.contentFrame{
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5em 1em;
+    z-index: 9999;
+    box-sizing: border-box;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5em;
+  }
+  
+  .logo img {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left:auto;
+  }
+  
+  .icons img {
+    height: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+  }
+  
+  .icons img:hover {
+    transform: scale(1.2);
+    filter: brightness(1.3);
+  }
+
+  .button {
+    background: linear-gradient(to right, #e0b321, #e6ce78, #e0bd21);
+    border: 4px solid #a5b718;
+    border-radius: 30px;
+    display: flex;
+    padding: 0.3em 1em;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    z-index: 10;
+    color: #655753;
+    font-family: "LXGW WenKai TC", cursive;
+    font-weight: 400;
+    cursor: none;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  .button:hover {
+    background: linear-gradient(to left, #e59834, #f7e08d, #faa620);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 4px solid #8b9c0c;
+  }
+  
+
+  #shareBox {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: none;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 300px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+    max-width: calc(100% - 40px);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+  
+  #shareBox p {
+    font-size: 1.2em;
+    color: #655753;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+  }
+  
+  #overlay {
+    position: fixed;
+    inset:0;  
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 999;
+    transition: all 0.3s ease;
+  }
+  
+  #closeShareBox {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.2em;
+    color: #655753;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  #closeShareBox:hover {
+    background-color: rgba(101, 87, 83, 0.1);
+    transform: rotate(90deg);
+  }
+  
+  .shareLine, .shareFacebook, .copyLink {
+    display: block;
+    width: 80%;
+    margin: 15px auto;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: "LXGW WenKai TC", cursive;
+    touch-action: manipulation;
+  }
+  
+  .shareLine {
+    background: linear-gradient(45deg, #06C755, #00E676);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .shareLine:hover {
+    background: linear-gradient(45deg, #00E676, #06C755);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(6, 199, 85, 0.3);
+  }
+  
+  .shareFacebook {
+    background: linear-gradient(45deg, #4a69bd, #6c5ce7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .shareFacebook:hover {
+    background: linear-gradient(45deg, #6c5ce7, #4a69bd);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 105, 189, 0.3);
+  }
+  
+  .copyLink {
+    background: linear-gradient(45deg, #d5b841, #b69a2c);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .copyLink:hover {
+    background: linear-gradient(45deg, #b69a2c, #d5b841);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 105, 189, 0.3);
+  }
+  
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  #shareBox.show {
+    animation: slideIn 0.3s ease forwards;
+  }
+  
+  body.darkening-start {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.3) 70%), antiquewhite;
+  }
+  
+  body.darkening-mid {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.6) 70%), antiquewhite;
+  }
+  
+  body.wish-active {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 70%), antiquewhite;
+  }
+  
+
+  .fireflies-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 150, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 150, 1);
+    pointer-events: none;
+    animation: moveBezier linear infinite, flicker 1.5s infinite alternate;
+  }
+  
+  @keyframes flicker {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.3); }
+  }
+  
+  @keyframes moveBezier {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(30px, -40px) rotate(15deg); }
+    40% { transform: translate(-60px, 20px) rotate(-10deg); }
+    60% { transform: translate(50px, -50px) rotate(20deg); }
+    80% { transform: translate(-40px, 40px) rotate(-15deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  .clickable {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+  
+  audio, 
+  audio:hover, 
+  audio:focus, 
+  audio:active,
+  audio * {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+  
+  @media screen and (max-width: 1024px) and (min-width: 769px) {
+    body {
+      font-size: 22px;
+    }
+  
+    .nav {
+      padding: 0.4em 0.8em;
+    }
+  
+    .logo img {
+      max-width: 80px;
+    }
+  
+    .icons img {
+      max-width: 35px;
+    }
+  
+    .innerContainer {
+      padding: 1rem;
+    }
+    
+    .image-box {
+      width: 75%;
+      height: 65%;
+    }
+    
+    .text-box img {
+      width: 12%;
+    }
+  }
+  
+ 
+  @media screen and (max-width: 768px) {
+
+    #cursor, .halo {
+      display: none !important;
+    }
+  
+    * {
+      cursor: auto !important;
+    }
+  
+    .clickable, .button, .image-box {
+      cursor: pointer !important;
+    }
+  
+    body {
+      font-size: 20px;
+      overflow-x: hidden;
+      overflow-y: auto !important;
+      height: auto !important;
+      min-height: 100vh;
+      position: relative !important;
+    }
+  
+    .container {
+      padding: 0;
+      margin: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: auto !important;
+      min-height: 100vh;
+      overflow: visible !important;
+    }
+  
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.3em 0.6em;
+      background-color: rgba(250, 235, 215, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+  
+    .logo {
+      gap: 0.3em;
+    }
+  
+    .logo img {
+      max-width: 70px;
+    }
+  
+    .logo div:last-child {
+      font-size: 0.9em;
+    }
+  
+    .icons {
+      gap: 0.5em;
+    }
+  
+    .icons img {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+    }
+
+    .contentFrame {
+      width: 100%;
+      margin-top: 60px;
+      padding: 0.6rem;
+      box-sizing: border-box;
+      min-height: calc(100vh - 60px);
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+  
+    #shareBox {
+      position: fixed !important;
+      top: 30vh !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 90% !important;
+      max-width: 320px !important;
+      min-width: 280px !important;
+      padding: 20px !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      right: auto !important;
+      bottom: auto !important;
+      max-height: 80vh !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      z-index: 10000 !important;
+      border-radius: 15px !important;
+    }
+
+    #overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 9999 !important;
+    }
+  
+    #shareBox p {
+      font-size: 1.1em;
+      margin: 0 0 15px 0;
+    }
+  
+    .shareLine, .shareFacebook, .copyLink {
+      width: 100%;
+      font-size: 0.9em;
+      padding: 0.6rem 0.8rem;
+      margin: 5px 0;
+      border-radius: 12px;
+    }
+  
+    #closeShareBox {
+      width: 30px;
+      height: 30px;
+      top: 10px;
+      right: 10px;
+    }
+  
+    .button {
+      font-size: 0.75em;
+      padding: 0.25em 0.8em;
+      min-height: 44px;
+    }
+  
+    .innerContainer {
+      flex-direction: column;
+      height: auto;
+      min-height: calc(100vh - 100px);
+      padding: 1rem 0;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .imageWrap {
+      flex: none;
+      width: 100%;
+      height: auto;
+      justify-content: center !important;
+      margin: 1rem 0;
+      position: relative;
+    }
+  
+    .imageWrap::before {
+      display: none;
+    }
+  
+    .image-box {
+      width: 280px;
+      height: 280px;
+      max-width: 80vw;
+      max-height: 80vw;
+      animation: none;
+      position: relative;
+      touch-action: manipulation;
+    }
+  
+    .image-box::after {
+      width: 90%;
+      height: 90%;
+    }
+  
+    .brand-box {
+      position: static;
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      order: 2;
+    }
+  
+    .text-box {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem;
+      max-width: 45%;
+    }
+  
+    .text-box img {
+      width: 80%;
+      max-width: 120px;
+      height: auto;
+    }
+  
+    .imageWrap:first-child {
+      order: 1;
+    }
+  
+    .brand-box {
+      order: 2;
+    }
+  
+    .imageWrap:last-child {
+      order: 3;
+    }
+  
+    .image-box:active {
+      transform: scale(0.95);
+      transition: transform 0.1s ease;
+    }
+  
+    .icons img:active {
+      transform: scale(0.95);
+      transform-origin: center;
+    }
+  
+    .shareLine:active, .shareFacebook:active, .copyLink:active {
+      transform: translateY(-2px);
+    }
+  
+    #closeShareBox:active {
+      transform: rotate(90deg);
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    body {
+      font-size: 18px;
+    }
+  
+    .nav {
+      padding: 5px 10px;
+    }
+  
+    .logo img {
+      max-width: 60px;
+    }
+  
+    .logo div:last-child {
+      font-size: 0.8em;
+    }
+  
+    .icons img {
+      max-width: 25px;
+    }
+  
+    .contentFrame {
+      padding: 10px;
+    }
+  
+    #shareBox {
+      min-width: 280px;
+      padding: 20px;
+    }
+  
+    .shareLine, .shareFacebook, .copyLink {
+      width: 90%;
+      padding: 10px 15px;
+    }
+  
+    .innerContainer {
+      padding: 0.5rem;
+    }
+  
+    .image-box {
+      width: 250px;
+      height: 250px;
+    }
+  
+    .brand-box {
+      padding: 0.5rem;
+    }
+  
+    .text-box {
+      padding: 0.3rem;
+    }
+  
+    .text-box img {
+      width: 15%;
+    }
+  }
+  
+  @media screen and (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
+    .nav {
+      padding: 5px 10px;
+    }
+  
+    .contentFrame {
+      padding: 10px;
+    }
+  
+    .innerContainer {
+      gap: 20px;
+      padding: 10px;
+    }
+  
+    .imageWrap {
+      gap: 10px;
+    }
+  
+    .image-box {
+      max-width: 150px;
+    }
+  
+    .brand-box {
+      display: none;
+    }
+  
+    #shareBox {
+      min-width: 280px;
+      padding: 20px;
+    }
+  
+    .shareLine, .shareFacebook, .copyLink {
+      width: 90%;
+      padding-left: env(safe-area-inset-left);
+padding-right: env(safe-area-inset-right);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+
+    body:not(.share-active) {
+      overflow-y: auto !important;
+      position: relative !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+  
+    .contentFrame {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      position: relative !important;
+    }
+
+    .contentFrame * {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .wish-section {
+      max-height: none !important;
+      overflow: visible !important;
+    }
+  
+    .content-wrapper {
+      min-height: auto !important;
+      overflow: visible !important;
+    }
+  
+    .wish-input textarea {
+      -webkit-overflow-scrolling: touch;
+      resize: none;
+      overflow-y: auto;
+      width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+  word-break:break-all;
+    }
+  
+    .wish-section,
+    .content-wrapper,
+    .container {
+      touch-action: pan-y !important;
+    }
+  }
+  #displayWish{
+    max-width:100%;
+    word-break:break-all;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    [data-tooltip]:before,
+    [data-tooltip]:after {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+  }
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: inherit;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+.icon-button img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.button-text {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .icon-button {
+    padding: 10px 12px;
+    gap: 6px;
+    font-size: 14px;
+  }
+  
+  .icon-button img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .button-text {
+    display: none;
+  }
+}
+
+body.wish-page .nav {
+  color: rgb(222, 203, 180);
+}

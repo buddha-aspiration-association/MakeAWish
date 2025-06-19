@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="wish.css">
+    <title>寫下你的願望</title>
+</head>
+<body class="wish-page">
+    <div class="container">
+        <div class="content-wrapper fade-in">
+            <div class="wish-image">
+                <img id="showCandle" alt="願望燈籠" class="floating">
+            </div>
+
+            <main class="wish-section slide-up">
+                <h1>✨ 寫下你的願望 ✨</h1>
+                <p class="wish-desc">在下方寫下你最真摯的願望。</p>
+            
+                <div class="wish-input">
+                    <label for="wish">💫 你的願望：</label>
+                    <textarea id="wish" rows="4" placeholder="在這裡寫下你的願望..." maxlength="100" autofocus></textarea>
+                    <div class="word-count">
+                        <span id="currentLength">0</span>/100
+                    </div>
+                </div>
+            
+                <button class="submit-button pulse-animation" onclick="validateWish()" disabled>
+                    <span class="button-content">
+                        <span class="star">✨</span>
+                        送出願望
+                        <span class="star">✨</span>
+                    </span>
+                </button>
+            </main>
+        </div>
+    </div>
+
+    <div id="success-animation" class="success-animation hidden">
+        <div class="sparkles"></div>
+    </div>
+</body>
+</html>

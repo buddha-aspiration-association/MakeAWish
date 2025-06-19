@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./picture/wishLogo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="share.css">
+    <link rel="stylesheet" href="dumu.css">
+    <link rel="stylesheet" href="indexContent.css">
+    <link rel="stylesheet" href="wishMake.css">
+    <title>滿願點燈</title>
+</head>
+<body>
+  <div id="cursor"></div>
+  <div class="sparkles"></div>
+    <div class="container">
+        <div class="nav">
+            <div class="logo" onclick="enterLink('indexContent')">
+                <div>
+                    <img src="./picture/wishlogo.png" alt="Logo">
+                </div>
+                <div>
+                    滿願學會
+                </div>
+            </div>
+            <div class="icons">
+                <!-- <audio id="musicPlayer" loop autoplay> -->
+                <audio id="musicPlayer" loop>
+                    <source src="./music/audiobay-vietnam-lake-reflections-mood-sad-slowly-150275.mp3" type="audio/mpeg">
+                    您的瀏覽器不支援音樂播放。
+                </audio>
+                <button id="musicButton" class="icon-button" onclick="toggleMusic()">
+                    <span class="button-text">開啟背景音樂</span>
+                    <img id="musicIcon" src="./picture/music-icon.png" alt="Music">
+                </button>
+                <button id="linkButton" class="icon-button">
+                    <span class="button-text">分享此網站</span>
+                    <img id="linkIcon" src="./picture/link-icon.png" alt="Link">
+                </button>
+                <div id="overlay"></div>
+                <div id="shareBox" style="display: none;">
+                    <button id="closeShareBox" style="float: right;">Ｘ</button>
+                    <p>分享這個滿願點燈：</p>
+                    <button class="shareLine">分享到 Line</button>
+                    <button class="shareFacebook">分享到 Facebook</button>
+                    <button class="copyLink">複製連結</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentFrame">
+          <div id="indexContent-placeholder"></div>
+       </div>
+
+    </div>
+    <script>
+        fetch('indexContent.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('indexContent-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navigation:', error));
+    </script>
+    <script src="main.js"></script>
+    <script src="fireflies.js"></script>
+    <script src="transitions.js"></script>
+    <script src="wish.js"></script>
+    <script src="playWishAnimation.js"></script>
+</body>
+</html>
